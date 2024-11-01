@@ -1,0 +1,180 @@
+Exercice 1 :
+____________
+
+
+Sortie :
+321
+123
+321123
+1213121
+
+
+Exercice 2 :
+____________
+
+
+1)
+12
+11
+10
+
+2)
+La fonction f calcule récursivement la somme de tous les entiers de 0 à X, plus une valeur de départ, Y.
+
+
+Exercice 3 :
+____________
+
+
+def chiffresPairs(x):
+    
+    if x == 0:
+        return True
+    
+    if x % 10 % 2 != 0:
+        return False
+    
+    else:
+        return chiffresPairs(x // 10)
+        
+assert chiffresPairs(824) == chiffresPairs(0) == chiffresPairs(6020) == True, "Erreur : les chiffres pairs ne sont pas détectés"
+assert chiffresPairs(124) == chiffresPairs(10) == False, "Erreur : trop de chiffres pairs sont détectés"
+
+
+Exercice 4 :
+____________
+
+
+def sommeChiffresPairs(x):
+    
+    if x == 0:
+        return 0
+    
+    sommeP = 0
+    chiffre = x % 10
+    if chiffre % 2 == 0:
+        sommeP = chiffre
+    
+    return sommeChiffresPairs(x // 10) + sommeP
+        
+assert sommeChiffresPairs(824) == 8 + 2 + 4 == 14, "Erreur : les chiffres pairs ne sont pas détectés"
+assert sommeChiffresPairs(0) == sommeChiffresPairs(105) == 0, "Erreur : trop de chiffres pairs sont détectés"
+
+
+Exercice 5 :
+____________
+
+
+def produit(a, n):
+    
+    if n == 0:
+        return 1
+    
+    return produit(a, n - 1) * a
+
+def sommeSuiteGeo(a, n):
+    
+    assert n >= 0, "Erreur, n est négatif"
+    
+    if n == 0:
+        return 1
+    
+    return produit(a, n) + sommeSuiteGeo(a, n - 1)
+    
+assert sommeSuiteGeo(2, 3) == 15, "Erreur, cas de base"
+assert sommeSuiteGeo(5, 0) == 1, "Erreur, cas limite"
+
+
+Exercice 6 :
+____________
+
+
+def maxi(l):
+    
+    if len(l) == 1:
+        return l[0]
+    
+    if l[-1] > l[-2]:
+        l[-2] = l[-1]
+    
+    return maxi(l[: -1])
+    
+def mini(l):
+    
+    if len(l) == 1:
+        return l[0]
+    
+    if l[-1] > l[-2]:
+        l[-2] = l[-1]
+    
+    return mini(l[: -1])
+    
+def minmax(l):
+    return (mini(l), maxi(l))
+    
+assert minmax([5, 1, 6, -3]) == (-3, 6), "Erreur, cas de base"
+assert minmax([0]) == (0, 0), "Erreur, cas limite"
+
+
+Exercice 7 :
+____________
+
+
+1)
+def doubleTriangle1(n):
+
+    assert n > 0, "Erreur : n est trop petit"    
+
+    if n == 1:
+        print('*')
+    
+    else:
+        print('*' * n)
+        doubleTriangle1(n - 1)
+        print('*' * n)
+    
+doubleTriangle1(1)
+print()
+doubleTriangle1(2)
+print()
+doubleTriangle1(4)
+print()
+
+2)
+def doubleTriangle2(n):
+
+    assert n > 0, "Erreur : n est trop petit"    
+
+    if n == 1:
+        return "*\n"
+    
+    else:
+        return '*' * n + "\n" + doubleTriangle2(n - 1) + '*' * n + "\n"
+        
+def diabolo(n):
+    
+    assert n > 0, "Erreur : n est trop petit"
+    
+    if n == 1:
+        return ""
+    
+    else:
+        return diabolo(n - 1) + ' ' * (n - 1) + diabolo(n - 1)
+        
+def final(n):
+    
+    if n == 1:
+        print(list(doubleTriangle2(n).split("\n"))[0] + list(diabolo(n).split("\n"))[0])
+
+    else:
+        final(n - 1)
+        print(list(doubleTriangle2(n).split("\n"))[n - 1] + list(diabolo(n).split("\n"))[n - 1])
+        final(n - 1)
+    
+    
+final(1)
+print()
+final(2)
+print()
+final(4)
+print()
